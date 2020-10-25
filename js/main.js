@@ -62,12 +62,9 @@
     const counterNumbers = document.querySelectorAll('.counter-number')
     counterNumbers.forEach((counterNumber)=>{
       if(window.scrollY > (document.querySelector('.event-block').offsetTop-counterNumber.offsetTop)){
-        
         counterNumber.classList.add('active')
         counterNumber.addEventListener('transitionend', function(e) {
           if(e.propertyName == 'opacity'){
-            console.log(e.target.innerHTML)
-            
             animateValue(counterNumber, 0, e.target.innerHTML, 3000 )
           }
         })  
@@ -79,7 +76,8 @@
     if (start === end) return;
     let range = end - start;
     let current = start;
-    let increment = end > start? Math.ceil(end/300) : -1;
+    let countUp = end < 100? 3 : end <1000? 100 : end < 5000? 200: 300 
+    let increment = end > start? Math.ceil(end/countUp) : -1;
     let stepTime = Math.abs(Math.floor(duration / range));
     let obj = target;
     let timer = setInterval(function() {
